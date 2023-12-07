@@ -6,71 +6,68 @@
 /*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:14:56 by ajoya-pi          #+#    #+#             */
-/*   Updated: 2023/11/22 17:59:58 by joya             ###   ########.fr       */
+/*   Updated: 2023/12/08 00:08:54 by joya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*next_line(char *aux)
+char	*ft_strchr(const char *s, int c)
 {
-	int		i;
-	char	*line;
+	int	i;
 
 	i = 0;
-	while (aux[i] != '\n' && aux[i] != '\0')
+	while (s[i] != '\0' && s[i] != (const char)c)
 		i++;
-	line = malloc((i + 1) * sizeof(char));
-	if (line == NULL)
+	if (s[i] == (const char)c)
+		return ((char *)s + i);
+	return (NULL);
+}
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char			*total;
+	unsigned int	i;
+	unsigned int	size;
+	unsigned int	size1;
+
+	i = 0;
+	size = ft_strlen(s1);
+	size1 = ft_strlen(s2);
+	total = (char *)malloc((size * sizeof(char)) + (size1 * sizeof(char)) + 1);
+	if (total == NULL)
 		return (NULL);
-	i = 0;
-	while (aux[i] != '\n' && aux[i] != '\0')
+	while (i < size)
 	{
-		line[i] = aux[i];
+		total[i] = s1[i];
 		i++;
 	}
-	line[i] = '\0';
-	return (line);
-}
-
-char	*delete_first(char *aux)
-{
-	int		i;
-	int		j;
-	char	*nlines;
-
-	j = 0;
-	i = 0;
-	while (aux[i] != '\n' && aux[i] != '\0')
-		i++;
-	nlines = malloc((int)ft_strlen(aux) - i);
-	while (j < (int)ft_strlen(aux) - i)
-	{
-		nlines[j] = aux[j + i + 1];
-		j++;
-	}
-	nlines[j] = '\0';
-	return (nlines);
-}
-
-char	*readfile(int fd, int text)
-{	
-	int		a;
-	char	*aux;
-	int		size;
-
 	size = 0;
-	aux = malloc(BUFFER_SIZE);
-	if (aux == NULL)
-		return (NULL);
-	while(size <= text)
+	while (size < size1)
 	{
-		a = read(fd, aux, BUFFER_SIZE);
-		if (a == -1)
-			return (NULL);
-		size = a + size;
+		total[i] = s2[size];
+		i++;
+		size++;
 	}
-	return (aux);
+	total[i] = '\0';
+	return (total);
+}
+
+char	*fill_line(char *s1)
+{
+	char	*s;
+	size_t	i;
+
+	i = 0;
+	s = (char *)malloc((ft_strlen(s1) + 1) * sizeof(const char));
+	if (s == NULL)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		s[i] = s1[i];
+		i++;
+	}
+	s[i] = '\0';
+	return (s);
 }
 
 int	check(char *string)
@@ -78,65 +75,107 @@ int	check(char *string)
 	int i;
 
 	i = 0;
-	while (i < ft_strlen(string))
+	while (string[i] != '\0')
 	{
-		if (string[i] == '\n')
-			return(1);
-		if (string[i] == '\0')
-			return (2);
-			i++;
+		if(string[i] == '\n')
+			return (i);
+		i++;
 	}
 	return (0);
 }
-char	*text(int fd, char *nlines, int size)
+char	*get_line(char * nline)
 {
-	char	aux[1024];
-	char 	*buffer;
-
-	buffer = readfile(fd, size);
-	if (buffer == NULL)
-	{
-		free (buffer);
+	char	*line;
+	int		i;
+	
+	i = 0;
+	if(!nline[i])
 		return (NULL);
-	}
-	if (nlines == 0)
-		ft_strlcpy(aux, buffer, ft_strlen(buffer));
+	if (check(nline) == 0)
+		line = fill_line(nline);
 	else
 	{
-		ft_strlcpy(aux, nlines, size);
-		ft_strladd(aux, buffer, ft_strlen(buffer));		
+		line = malloc(ft_strchr(nline, '\n') - nline + 1);
+		if (line == NULL)
+			return (NULL);
+		while (nline[i] != '\n')
+		{
+			line[i] = nline[i];
+			i++;
+		}
+		line[i] = nline[i];
+		line[i + 1] = '\0';
 	}
-	while(check(aux) != 1)
+	return (line);
+}
+
+
+
+
+char	*readfile(int fd, char *nlines)
+{
+	char	*aux;
+	int		size;
+
+	size = 1;
+	aux = malloc(BUFFER_SIZE + 1); //+1
+	if (aux == NULL)
 	{
-		buffer = readfile(fd, size);
-		ft_strladd(aux, buffer, ft_strlen(buffer));
+		free (nlines);
+		return (NULL);
 	}
-	return(fill_line(ft_strlen(aux), aux));
+	while (nlines && size > 0 && check(nlines) == 0)
+	{
+		size = read(fd, aux, BUFFER_SIZE);
+		if (size == -1)
+		{
+			free (aux);
+			free (nlines);
+			return (NULL);
+		}
+		aux[size] = '\0';
+		nlines = ft_strjoin(nlines, aux);
+	}
+	free (aux);
+	return (nlines);
+}
+char	*next_line(char *nlines)
+{
+	char	*line;
+
+	if(!nlines)
+		return (NULL);
+	if (check(nlines) == 0)
+	{
+		free (nlines);
+		return (NULL);
+	}
+	line = ft_strchr(nlines, '\n');
+	line = fill_line(line);
+	free (nlines);
+	return(line);
+	
+
 }
 
 char	*get_next_line(int fd)
 {
-	static char		*nlines;
-	char			*line;
-	char			*aux;
-	int				size;
-
+	static char	*nlines;
+	char		*line;
+ 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (nlines == NULL)
-		size = 0;
-	else
-		size = ft_strlen(nlines);
-	aux = text(fd, nlines, size);
-	if (aux == NULL)
 	{
-		free(aux);
-		return (aux);
+		nlines = malloc(sizeof(char) * 1);
+		if (nlines == NULL)
+			return (NULL);
+		nlines[0] = '\0';
 	}
-	nlines = aux;
-	line = next_line(aux);
-	while (check(line) == 1)
-		line = next_line(aux);
-	nlines = delete_first(nlines);
+	nlines = readfile(fd, nlines);	
+	if (nlines == NULL)
+		return (NULL);
+	line = get_line(nlines);
+	nlines = next_line(nlines);
 	return (line);
 }
