@@ -6,7 +6,7 @@
 /*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 19:53:19 by joya              #+#    #+#             */
-/*   Updated: 2023/12/07 23:32:04 by joya             ###   ########.fr       */
+/*   Updated: 2023/12/08 20:09:12 by joya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,64 @@ size_t	ft_strlen(const char *str)
 	while (str[i] != '\0')
 		i++;
 	return (i);
+}
+
+char	*ft_strchr(char *s, int c)
+{
+	int	i;
+
+	if (s == NULL)
+		return (NULL);
+	i = 0;
+	while (s[i] != '\0' && s[i] != (char)c)
+		i++;
+	if (s[i] == (const char)c)
+		return ((char *)&s[i] + i);
+	return (NULL);
+}
+
+char	*ft_strdup(char *s1)
+{
+	char	*s;
+	size_t	i;
+
+	i = 0;
+	s = (char *)malloc((ft_strlen(s1) + 1) * sizeof(const char));
+	if (s == NULL)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		s[i] = s1[i];
+		i++;
+	}
+	s[i] = '\0';
+	return (s);
+}
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char			*total;
+	unsigned int	i;
+	unsigned int	size;
+	unsigned int	size1;
+
+	i = 0;
+	size = ft_strlen(s1);
+	size1 = ft_strlen(s2);
+	total = (char *)malloc((size * sizeof(char)) + (size1 * sizeof(char)) + 1);
+	if (total == NULL)
+		return (NULL);
+	while (i < size)
+	{
+		total[i] = s1[i];
+		i++;
+	}
+	size = 0;
+	while (size < size1)
+	{
+		total[i] = s2[size];
+		i++;
+		size++;
+	}
+	total[i] = '\0';
+	return (total);
 }
