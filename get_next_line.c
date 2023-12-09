@@ -6,20 +6,20 @@
 /*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:14:56 by ajoya-pi          #+#    #+#             */
-/*   Updated: 2023/12/08 19:40:59 by joya             ###   ########.fr       */
+/*   Updated: 2023/12/09 12:06:22 by joya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 
-char	*get_line(char * nline)
+char	*clean_line(char * nline)
 {
 	char	*line;
 	int		i;
 	
 	i = 0;
-	if(!nline[i])
+	if(nline[i] == '\0')
 		return (NULL);
 	if (ft_strchr(nline, '\n') == NULL)
 		line = ft_strdup(nline);
@@ -44,6 +44,7 @@ char	*next_line(char *nlines)
 {
 	char	*line;
 
+
 	if (ft_strchr(nlines, '\n') == NULL)
 	{
 		free (nlines);
@@ -66,7 +67,7 @@ char	*readfile(int fd, char *nlines)
 		free (nlines);
 		return (NULL);
 	}
-	while (size > 0 && ft_strchr(nlines, '\n') == NULL)  // a lo mejor hace falta decir tambien hasta que llegue al final de nlines
+	while (nlines && size > 0 && ft_strchr(nlines, '\n') == NULL)  // a lo mejor hace falta decir tambien hasta que llegue al final de nlines
 	{
 		size = read(fd, aux, BUFFER_SIZE);
 		if (size == -1)
@@ -100,7 +101,7 @@ char	*get_next_line(int fd)
 	nlines = readfile(fd, nlines);
 	if (nlines == NULL)
 		return (NULL);
-	line = get_line(nlines);
+	line = clean_line(nlines);
 	nlines = next_line(nlines);
 	return (line);
 }

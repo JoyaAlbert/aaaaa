@@ -6,7 +6,7 @@
 /*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 19:53:19 by joya              #+#    #+#             */
-/*   Updated: 2023/12/08 20:09:12 by joya             ###   ########.fr       */
+/*   Updated: 2023/12/09 12:12:42 by joya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ char	*ft_strchr(char *s, int c)
 	if (s == NULL)
 		return (NULL);
 	i = 0;
-	while (s[i] != '\0' && s[i] != (char)c)
+	while (s[i] != '\0' && s[i] != (unsigned char)c)
 		i++;
-	if (s[i] == (const char)c)
-		return ((char *)&s[i] + i);
+	if (s[i] == (char)c)
+		return ((char *)&s[i] + 1);
 	return (NULL);
 }
 
@@ -42,7 +42,7 @@ char	*ft_strdup(char *s1)
 	size_t	i;
 
 	i = 0;
-	s = (char *)malloc((ft_strlen(s1) + 1) * sizeof(const char));
+	s = (char *)malloc((ft_strlen(s1) + 1) * sizeof(char));
 	if (s == NULL)
 		return (NULL);
 	while (s1[i] != '\0')
