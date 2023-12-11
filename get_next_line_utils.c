@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ajoya-pi <ajoya-pi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 19:53:19 by joya              #+#    #+#             */
-/*   Updated: 2023/12/09 12:12:42 by joya             ###   ########.fr       */
+/*   Updated: 2023/12/11 15:44:32 by ajoya-pi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*ft_strchr(char *s, int c)
 
 	if (s == NULL)
 		return (NULL);
+
 	i = 0;
 	while (s[i] != '\0' && s[i] != (unsigned char)c)
 		i++;
@@ -65,7 +66,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	size1 = ft_strlen(s2);
 	total = (char *)malloc((size * sizeof(char)) + (size1 * sizeof(char)) + 1);
 	if (total == NULL)
+	{
+		free (s1);
 		return (NULL);
+	}
 	while (i < size)
 	{
 		total[i] = s1[i];
@@ -79,5 +83,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		size++;
 	}
 	total[i] = '\0';
+	free (s1);
 	return (total);
 }

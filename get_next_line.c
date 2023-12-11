@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ajoya-pi <ajoya-pi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:14:56 by ajoya-pi          #+#    #+#             */
-/*   Updated: 2023/12/09 12:06:22 by joya             ###   ########.fr       */
+/*   Updated: 2023/12/11 15:36:33 by ajoya-pi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ char	*next_line(char *nlines)
 {
 	char	*line;
 
-
+	if (nlines == NULL)
+		return (NULL);
 	if (ft_strchr(nlines, '\n') == NULL)
 	{
 		free (nlines);
@@ -67,7 +68,7 @@ char	*readfile(int fd, char *nlines)
 		free (nlines);
 		return (NULL);
 	}
-	while (nlines && size > 0 && ft_strchr(nlines, '\n') == NULL)  // a lo mejor hace falta decir tambien hasta que llegue al final de nlines
+	while (nlines && size > 0 && ft_strchr(nlines, '\n') == NULL)
 	{
 		size = read(fd, aux, BUFFER_SIZE);
 		if (size == -1)
@@ -93,14 +94,17 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (nlines == NULL)
 	{
-		nlines = malloc(sizeof(char) * 1);
+		nlines = malloc(sizeof(char) *  1);
 		if (nlines == NULL)
 			return (NULL);
 		nlines[0] = '\0';
 	}
 	nlines = readfile(fd, nlines);
 	if (nlines == NULL)
+	{
+		free (nlines);
 		return (NULL);
+	}
 	line = clean_line(nlines);
 	nlines = next_line(nlines);
 	return (line);

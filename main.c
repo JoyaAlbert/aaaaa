@@ -2,8 +2,8 @@
 
 int main()
 {
-	int fd = open("test.txt", O_RDONLY);
-	for(int i = 0; i < 20; i++)
+	int fd = open("testTexts/big.txt", O_RDONLY);
+	for(int i = 0; i < 90; i++)
 		printf("%s", get_next_line(fd));
 	return 0;
 }
