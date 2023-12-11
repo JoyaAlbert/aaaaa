@@ -3,42 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajoya-pi <ajoya-pi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:14:56 by ajoya-pi          #+#    #+#             */
-/*   Updated: 2023/12/11 15:36:33 by ajoya-pi         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:08:57 by joya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-
-char	*clean_line(char * nline)
+char	*clean_line(char *s)
 {
 	char	*line;
 	int		i;
-	
+
 	i = 0;
-	if(nline[i] == '\0')
+	if (s[i] == '\0')
 		return (NULL);
-	if (ft_strchr(nline, '\n') == NULL)
-		line = ft_strdup(nline);
+	if (ft_strchr(s, '\n') == NULL)
+		line = ft_strdup(s);
 	else
 	{
-		line = malloc(ft_strchr(nline, '\n') - nline + 1);  //ft_strlen(nline) - ft_strlen(ft_strchr(nline, '\n')) + 1
+		line = malloc(ft_strlen(s) - ft_strlen(ft_strchr(s, '\n')) + 1);
 		if (line == NULL)
 			return (NULL);
-		while (nline[i] != '\n')
+		while (s[i] != '\n')
 		{
-			line[i] = nline[i];
+			line[i] = s[i];
 			i++;
 		}
-		line[i] = nline[i];
+		line[i] = s[i];
 		line[i + 1] = '\0';
 	}
 	return (line);
 }
-
 
 char	*next_line(char *nlines)
 {
@@ -53,7 +51,7 @@ char	*next_line(char *nlines)
 	}
 	line = ft_strdup(ft_strchr(nlines, '\n'));
 	free (nlines);
-	return(line);
+	return (line);
 }
 
 char	*readfile(int fd, char *nlines)
@@ -84,17 +82,16 @@ char	*readfile(int fd, char *nlines)
 	return (nlines);
 }
 
-
 char	*get_next_line(int fd)
 {
 	static char	*nlines;
 	char		*line;
- 
+
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (nlines == NULL)
 	{
-		nlines = malloc(sizeof(char) *  1);
+		nlines = malloc(sizeof(char) * 1);
 		if (nlines == NULL)
 			return (NULL);
 		nlines[0] = '\0';

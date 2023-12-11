@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajoya-pi <ajoya-pi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 19:53:19 by joya              #+#    #+#             */
-/*   Updated: 2023/12/11 15:48:47 by ajoya-pi         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:25:53 by joya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*ft_strchr(char *s, int c)
 
 	if (s == NULL)
 		return (NULL);
-
 	i = 0;
 	while (s[i] != '\0' && s[i] != (unsigned char)c)
 		i++;
@@ -54,6 +53,7 @@ char	*ft_strdup(char *s1)
 	s[i] = '\0';
 	return (s);
 }
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char			*total;

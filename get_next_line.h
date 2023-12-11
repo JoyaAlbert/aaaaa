@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajoya-pi <ajoya-pi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:13:51 by ajoya-pi          #+#    #+#             */
-/*   Updated: 2023/12/11 14:24:27 by ajoya-pi         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:05:55 by joya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include <stdio.h>
 # include <unistd.h>
 
-char    *get_next_line(int fd);
+char	*get_next_line(int fd);
 
 //UTILS FROM LIBFT
 char	*ft_strdup(char *s1);
-size_t  ft_strlen(const char *str);
+size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(char *s, int c);
 #endif
