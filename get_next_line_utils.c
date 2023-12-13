@@ -6,7 +6,7 @@
 /*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 19:53:19 by joya              #+#    #+#             */
-/*   Updated: 2023/12/11 18:25:53 by joya             ###   ########.fr       */
+/*   Updated: 2023/12/13 14:36:38 by joya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	size = 0;
 	while (size < size1)
-	{
-		total[i] = s2[size];
-		i++;
-		size++;
-	}
+		total[i++] = s2[size++];
 	total[i] = '\0';
 	free (s1);
 	return (total);

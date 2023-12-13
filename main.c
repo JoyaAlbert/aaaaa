@@ -3,7 +3,7 @@
 int main()
 {
 	int fd = open("testTexts/big.txt", O_RDONLY);
-	for(int i = 0; i < 90; i++)
+	for(int i = 0; i < 3; i++)
 		printf("%s", get_next_line(fd));
 	return 0;
 }
