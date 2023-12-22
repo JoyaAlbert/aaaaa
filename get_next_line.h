@@ -6,7 +6,7 @@
 /*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:13:51 by ajoya-pi          #+#    #+#             */
-/*   Updated: 2023/12/11 18:05:55 by joya             ###   ########.fr       */
+/*   Updated: 2023/12/22 13:43:58 by ajoya-pi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
-
-//UTILS FROM LIBFT
 char	*ft_strdup(char *s1);
 size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char *s1, char *s2);
