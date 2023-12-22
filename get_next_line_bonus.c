@@ -80,12 +80,12 @@ char	*get_next_line(int fd)
 	if (nlines[fd] == NULL)
 	{
 		nlines[fd] = malloc(sizeof(char) * 1);
-		if (nlines == NULL)
+		if (nlines[fd] == NULL)
 			return (NULL);
-		nlines[fd] = '\0';
+		nlines[fd] = NULL;
 	}
 	nlines[fd] = readfile(fd, nlines[fd]);
-	if (nlines == NULL)
+	if (nlines[fd] == NULL)
 	{
 		free (nlines[fd]);
 		return (NULL);
