@@ -72,7 +72,7 @@ char	*readfile(int fd, char *nlines)
 
 char	*get_next_line(int fd)
 {
-	static char	*nlines[50];
+	static char	*nlines[1024];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -82,14 +82,11 @@ char	*get_next_line(int fd)
 		nlines[fd] = malloc(sizeof(char) * 1);
 		if (nlines[fd] == NULL)
 			return (NULL);
-		nlines[fd] = NULL;
+		*nlines[fd] = '\0';
 	}
 	nlines[fd] = readfile(fd, nlines[fd]);
 	if (nlines[fd] == NULL)
-	{
-		free (nlines[fd]);
 		return (NULL);
-	}
 	line = clean_line(nlines[fd]);
 	nlines[fd] = next_line(nlines[fd]);
 	return (line);
