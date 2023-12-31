@@ -27,7 +27,12 @@ clean:
 fclean:			clean
 				@echo "$(RED)Deleting ${YELLOW}.a ${CLR_RMV}"
 				$(RM) $(NAME)
+
 bonus:			$(OBJ_BONUS)
+				@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME)${CLR_RMV}with bonus${CYAN}"
+				$(LIB) $(FLAGS) $(NAME) $(OBJ-BONUS)
+
+				
 re:				fclean all
 
 .PHONY: all clean fclean re
