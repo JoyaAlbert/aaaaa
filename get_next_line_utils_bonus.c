@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajoya-pi <ajoya-pi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joya <joya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:56:34 by ajoya-pi          #+#    #+#             */
-/*   Updated: 2023/12/27 12:56:35 by ajoya-pi         ###   ########.fr       */
+/*   Updated: 2024/01/14 15:40:32 by joya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,3 @@ char	*ft_strjoin(char *s1, char *s2)
 	free (s1);
 	return (total);
 }
-
-
