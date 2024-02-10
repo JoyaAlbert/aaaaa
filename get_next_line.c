@@ -6,7 +6,7 @@
 /*   By: ajoya-pi <ajoya-pi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:56:59 by ajoya-pi          #+#    #+#             */
-/*   Updated: 2023/12/27 15:31:56 by ajoya-pi         ###   ########.fr       */
+/*   Updated: 2024/02/10 14:53:20 by ajoya-pi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ char	*clean_line(char *s)
 		line = malloc(ft_strlen(s) - ft_strlen(ft_strchr(s, '\n')) + 1);
 		if (line == NULL)
 			return (NULL);
+		line[i] = s[i];
 		while (s[i] != '\n')
 		{
-			line[i] = s[i];
 			i++;
+			line[i] = s[i];
 		}
-		line[i] = s[i];
 		line[i + 1] = '\0';
 	}
 	return (line);
