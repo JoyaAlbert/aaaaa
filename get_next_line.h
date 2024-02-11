@@ -6,7 +6,7 @@
 /*   By: ajoya-pi <ajoya-pi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:56:51 by ajoya-pi          #+#    #+#             */
-/*   Updated: 2023/12/27 12:56:51 by ajoya-pi         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:04:30 by ajoya-pi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 10000000000
 # endif
 
 # include <stdlib.h>
