@@ -6,7 +6,7 @@
 /*   By: ajoya-pi <ajoya-pi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:56:59 by ajoya-pi          #+#    #+#             */
-/*   Updated: 2024/02/11 16:15:42 by ajoya-pi         ###   ########.fr       */
+/*   Updated: 2024/03/26 12:26:14 by ajoya-pi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,17 @@ char	*clean_line(char *s)
 char	*next_line(char *nlines)
 {
 	char	*line;
+	char	*aux;
 
+	aux = ft_strchr(nlines, '\n');
 	if (nlines == NULL)
 		return (NULL);
-	if (ft_strchr(nlines, '\n') == NULL)
+	if (aux == NULL)
 	{
 		free (nlines);
 		return (NULL);
 	}
-	line = ft_strdup(ft_strchr(nlines, '\n'));
+	line = ft_strdup(aux);
 	free (nlines);
 	return (line);
 }
